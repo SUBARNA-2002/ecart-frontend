@@ -1,4 +1,6 @@
-import React  from "react";
+import React from "react";
+import { Badge } from "@material-tailwind/react";
+// import { HomeIcon } from "@heroicons/react/24/solid";
 import logo from "../assests/logo.png";
 import {
   Collapse,
@@ -9,8 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
-export function CartNavbar() {
-
+export function CartNavbar({ cartdata }) {
   const [openNav, setOpenNav] = React.useState(false);
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -28,22 +29,20 @@ export function CartNavbar() {
   const handleCart = () => {
     navigate("/cart");
   };
- 
 
+  //   const handleLogout = () => {
+  //     sessionStorage.removeItem("user_id");
+  //     sessionStorage.removeItem("user_name");
+  //     navigate('/')
+  //   };
 
-//   const handleLogout = () => {
-//     sessionStorage.removeItem("user_id");
-//     sessionStorage.removeItem("user_name");
-//     navigate('/')
-//   };
-
-//   const userId = sessionStorage.getItem("user_id");
-//   console.log(userId);
+  //   const userId = sessionStorage.getItem("user_id");
+  //   console.log(userId);
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography as="li" color="black" className="p-1 font-normal">
-        <div onClick={handleHome}  className="flex items-center cursor-pointer">
+        <div onClick={handleHome} className="flex items-center cursor-pointer">
           Home
         </div>
       </Typography>
@@ -67,20 +66,16 @@ export function CartNavbar() {
         className="p-1 font-normal"
       >
         <div onClick={handleCart} className="flex items-center cursor-pointer">
-          Cart
+          <Badge content={cartdata.length}>
+            <IconButton color="pink">
+              <image src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-shopping-cart_90604.png" className="h-5 w-5" />
+            </IconButton>
+          </Badge>
         </div>
       </Typography>
-      <Typography
-        as="li"
-        // variant="medium"
-        color="black"
-        className="p-1 font-normal"
-      >
-        <div className="flex cursor-pointer items-center">Contact Us</div>
-      </Typography>
+      
     </ul>
   );
-  
 
   return (
     <div className=" max-h-[768px] w-full lg:w-full lg:px-20 px-10 py-2  ">
@@ -90,29 +85,25 @@ export function CartNavbar() {
             <img className="h-10" src={logo} alt="logo" />
           </Typography>
           <div className="flex items-center gap-4">
-            <div className="mr-[20rem] hidden lg:block">{navList}</div>
+            <div className=" hidden lg:block">{navList}</div>
 
             <div className="flex items-center gap-x-1">
-             
-                  <Button
-                    
-                    variant="text"
-                    size="md"
-                    color="pink"
-                    className="hidden lg:inline-block"
-                  >
-                    <span>Log In</span>
-                  </Button>
-                  <Button
-                    
-                    variant="gradient"
-                    color="pink"
-                    size="md"
-                    className="hidden lg:inline-block"
-                  >
-                    <span>Sign in</span>
-                  </Button>
-               
+              <Button
+                variant="text"
+                size="md"
+                color="pink"
+                className="hidden lg:inline-block"
+              >
+                <span>Log In</span>
+              </Button>
+              <Button
+                variant="gradient"
+                color="pink"
+                size="md"
+                className="hidden lg:inline-block"
+              >
+                <span>Sign in</span>
+              </Button>
             </div>
             <IconButton
               variant="text"
@@ -157,7 +148,7 @@ export function CartNavbar() {
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
-              <span >Log In</span>
+              <span>Log In</span>
             </Button>
             <Button
               fullWidth
@@ -166,7 +157,7 @@ export function CartNavbar() {
               color="pink"
               className=""
             >
-              <span >Sign in</span>
+              <span>Sign in</span>
             </Button>
           </div>
         </Collapse>

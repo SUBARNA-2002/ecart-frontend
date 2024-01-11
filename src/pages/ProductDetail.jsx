@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../assests/data/products";
 import { Button } from "@material-tailwind/react";
-function ProductDetail() {
-    const navigate = useNavigate();
+import { toast } from "react-toastify";
+function ProductDetail({ cartdata, setCartData }) {
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const [product, setProduct] = useState([]);
@@ -16,9 +17,20 @@ function ProductDetail() {
     );
     setReleted(relatedProduct);
   }, [id, product.category]);
-  const handleClick=(id)=>{
+  const handleClick = (id) => {
     navigate(`/products/${id}`);
-  }
+  };
+  const addToCart = (id, name, price, image) => {
+    const obj = {
+      id,
+      name,
+      price,
+      image,
+    };
+    setCartData([...cartdata,obj])
+    toast.success("Product added to cart ",{position: "bottom-right"})
+    console.log(cartdata)
+  };
   return (
     <>
       <div class="  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
@@ -42,10 +54,10 @@ function ProductDetail() {
                 {product.name}
               </h2>
               <p class="text-gray-500 text-sm">
-                By{" "}
-                <a href="#" class="text-indigo-600 hover:underline">
-                  ABC Company
-                </a>
+                
+                <div class="text-indigo-600 hover:underline">
+                  {product.category}
+                </div>
               </p>
 
               <div class="flex items-center space-x-4 my-4">
@@ -71,7 +83,7 @@ function ProductDetail() {
 
               <div class="flex py-4 space-x-4">
                 <Button
-                  // onClick={updateCart}
+                  onClick={()=>addToCart(product.id, product.name, product.price, product.image)}
                   variant="gradiant"
                   size="md"
                   color="pink"
@@ -85,52 +97,53 @@ function ProductDetail() {
         <hr />
         <div>Suggestion</div>
         <div className="">
-        <div className=" grid grid-cols-4 px-2  gap-3 py-5">
-        {related.map((e) => {
-          return (
-            <>
-              <div class="bg-white w-64 shadow-2xl border rounded-xl">
-                <img
-                  src={e.image}
-                  alt="Productimage"
-                  class="h-72 w-64 object-cover rounded-t-xl"
-                />
+          <div className=" grid grid-cols-4 px-2  gap-3 py-5">
+            {related.map((e) => {
+              return (
+                <>
+                  <div class="bg-white w-64 shadow-2xl border rounded-xl">
+                    <img
+                      src={e.image}
+                      alt="Productimage"
+                      class="h-72 w-64 object-cover rounded-t-xl"
+                    />
 
-                <div class="px-4 py-3 w-64">
-                  <span class="text-gray-400 mr-3 uppercase text-xs">
-                    Brand
-                  </span>
-                  <p class="text-lg font-bold text-black truncate block capitalize">
-                    {e.name}
-                  </p>
-                  <div class="flex items-center">
-                    <p class="text-lg font-semibold text-black cursor-auto my-3">
-                      ${e.price}
-                    </p>
-                    <del>
-                      <p class="text-sm text-gray-600 cursor-auto ml-2">$199</p>
-                    </del>
-                    <div class="ml-auto">
-                      <Button
-                        variant="gradiant"
-                        size="sm"
-                        color="pink"
-                        onClick={() => {
-                          handleClick(e.id);
-                        }}
-                      >
-                        View
-                      </Button>
+                    <div class="px-4 py-3 w-64">
+                      <span class="text-gray-400 mr-3 uppercase text-xs">
+                        Brand
+                      </span>
+                      <p class="text-lg font-bold text-black truncate block capitalize">
+                        {e.name}
+                      </p>
+                      <div class="flex items-center">
+                        <p class="text-lg font-semibold text-black cursor-auto my-3">
+                          ${e.price}
+                        </p>
+                        <del>
+                          <p class="text-sm text-gray-600 cursor-auto ml-2">
+                            $199
+                          </p>
+                        </del>
+                        <div class="ml-auto">
+                          <Button
+                            variant="gradiant"
+                            size="sm"
+                            color="pink"
+                            onClick={() => {
+                              handleClick(e.id);
+                            }}
+                          >
+                            View
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div>
+                </>
+              );
+            })}
+          </div>
         </div>
-       
       </div>
     </>
   );
