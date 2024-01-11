@@ -27,7 +27,10 @@ function ProductDetail({ cartdata, setCartData }) {
       price,
       image,
     };
-    setCartData([...cartdata,obj])
+    const existingCartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+    const updatedCartData = [...existingCartData, obj];
+    sessionStorage.setItem("cartData", JSON.stringify(updatedCartData));
+    setCartData(updatedCartData);
     toast.success("Product added to cart ",{position: "bottom-right"})
     console.log(cartdata)
   };
@@ -63,9 +66,8 @@ function ProductDetail({ cartdata, setCartData }) {
               <div class="flex items-center space-x-4 my-4">
                 <div>
                   <div class="rounded-lg bg-gray-100 flex py-2 px-3">
-                    <span class="text-indigo-400 mr-1 mt-1">$</span>
                     <span class="font-bold text-indigo-600 text-3xl">
-                      {product.price}
+                    ₹{product.price}
                     </span>
                   </div>
                 </div>
@@ -95,29 +97,29 @@ function ProductDetail({ cartdata, setCartData }) {
           </div>
         </>
         <hr />
-        <div>Suggestion</div>
-        <div className="">
-          <div className=" grid grid-cols-4 px-2  gap-3 py-5">
+        <div className="text-xl font-bold  text-center px-1 py-1 rounded-lg bg-pink-400 lg:inline-block text-white ">Suggestions</div>
+        <div className="py-4">
+          <div className=" lg:grid lg:grid-cols-4 lg:px-2  lg:gap-3 lg:py-5">
             {related.map((e) => {
               return (
                 <>
-                  <div class="bg-white w-64 shadow-2xl border rounded-xl">
+                  <div class=" lg:w-64 shadow-2xl lg:my-0 my-4 border rounded-xl">
                     <img
                       src={e.image}
                       alt="Productimage"
-                      class="h-72 w-64 object-cover rounded-t-xl"
+                      class="lg:h-72 lg:w-64 object-cover rounded-t-xl"
                     />
 
-                    <div class="px-4 py-3 w-64">
+                    <div class="px-4 py-3 lg:w-64">
                       <span class="text-gray-400 mr-3 uppercase text-xs">
-                        Brand
+                        {e.category}
                       </span>
                       <p class="text-lg font-bold text-black truncate block capitalize">
                         {e.name}
                       </p>
                       <div class="flex items-center">
                         <p class="text-lg font-semibold text-black cursor-auto my-3">
-                          ${e.price}
+                        ₹{e.price}
                         </p>
                         <del>
                           <p class="text-sm text-gray-600 cursor-auto ml-2">

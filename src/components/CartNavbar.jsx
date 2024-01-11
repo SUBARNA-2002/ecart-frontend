@@ -1,6 +1,5 @@
 import React from "react";
 import { Badge } from "@material-tailwind/react";
-// import { HomeIcon } from "@heroicons/react/24/solid";
 import logo from "../assests/logo.png";
 import {
   Collapse,
@@ -11,7 +10,9 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
-export function CartNavbar({ cartdata }) {
+export function CartNavbar() {
+  const cartdata = JSON.parse(sessionStorage.getItem("cartData")) || [];
+
   const [openNav, setOpenNav] = React.useState(false);
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -19,7 +20,7 @@ export function CartNavbar({ cartdata }) {
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
-  }, []);
+  }, [cartdata]);
   const handleHome = () => {
     navigate("/");
   };
@@ -29,15 +30,13 @@ export function CartNavbar({ cartdata }) {
   const handleCart = () => {
     navigate("/cart");
   };
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+  const handleLogin = () => {
+    navigate("/login");
+  };
 
-  //   const handleLogout = () => {
-  //     sessionStorage.removeItem("user_id");
-  //     sessionStorage.removeItem("user_name");
-  //     navigate('/')
-  //   };
-
-  //   const userId = sessionStorage.getItem("user_id");
-  //   console.log(userId);
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -48,7 +47,7 @@ export function CartNavbar({ cartdata }) {
       </Typography>
       <Typography
         as="li"
-        // variant="small"
+        
         color="black"
         className="p-1 font-normal"
       >
@@ -68,7 +67,7 @@ export function CartNavbar({ cartdata }) {
         <div onClick={handleCart} className="flex items-center cursor-pointer">
           <Badge content={cartdata.length}>
             <IconButton color="pink">
-              <image src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-shopping-cart_90604.png" className="h-5 w-5" />
+              <img src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-shopping-cart_90604.png" className="h-5 w-5" alt="cart logo" />
             </IconButton>
           </Badge>
         </div>
@@ -89,6 +88,7 @@ export function CartNavbar({ cartdata }) {
 
             <div className="flex items-center gap-x-1">
               <Button
+              onClick={handleLogin}
                 variant="text"
                 size="md"
                 color="pink"
@@ -97,6 +97,7 @@ export function CartNavbar({ cartdata }) {
                 <span>Log In</span>
               </Button>
               <Button
+              onClick={handleSignup}
                 variant="gradient"
                 color="pink"
                 size="md"

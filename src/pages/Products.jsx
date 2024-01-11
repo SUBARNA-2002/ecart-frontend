@@ -1,11 +1,9 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
-// import { ProductContext } from "../../context/ProductContext";
 import { useNavigate } from "react-router-dom";
 import { products } from "../assests/data/products";
 function Products() {
   const navigate = useNavigate();
-//   const {  data } = useContext(ProductContext);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,10 +35,9 @@ function Products() {
   };
   return (
     <>
-      <div className="px-20 flex py-2 justify-between  mb-4">
-        {/* Category Filter */}
-        <div className="flex gap-2">
-          <div className=" px-2 py-2 text-lg rounded-md bg-blue-gray-200">
+      <div className="lg:px-20 lg:flex py-2 lg:justify-between  lg:mb-4">
+        <div className="lg:flex inline-block lg:px-0 px-4 lg:gap-2">
+          <div className=" px-2 py-2 text-lg lg:my-0 my-2  rounded-md bg-blue-gray-200">
             <label htmlFor="category">Category : </label>
             <select
               className="px-2 py-1 rounded shadow-lg"
@@ -57,12 +54,11 @@ function Products() {
               <option value="outdoor">outdoor</option>
               <option value="entertainment">entertainment</option>
               <option value="wall-art">wall-art</option>
-              {/* Add more categories based on your data */}
             </select>
           </div>
 
-          {/* Price Filter */}
-          <div className="px-2 py-2 text-lg rounded-md bg-blue-gray-200">
+         
+          <div className="px-2 py-2 lg:my-0 my-2 text-lg rounded-md bg-blue-gray-200">
             <label htmlFor="price">Price : </label>
             <input
               className="rounded px-2"
@@ -78,11 +74,11 @@ function Products() {
           </div>
         </div>
 
-        {/* search */}
-        <div className="px-2 py-1 text-black  rounded-md border border-black">
+      
+        <div className="lg:px-2 py-1 text-black inline-block lg:mx-0 mx-4  rounded-md border border-black">
           <input
             placeholder="Search..."
-            className="rounded  px-2 py-1"
+            className="rounded  lg:px-2 px-7 py-2 lg:py-1"
             type="text"
             id="search"
             value={searchQuery}
@@ -90,20 +86,20 @@ function Products() {
           />
         </div>
       </div>
-      <div className=" grid grid-cols-5 px-20 gap-7 py-5">
+      <div className=" lg:grid lg:grid-cols-5 lg:px-20 lg:gap-7 lg:py-5">
         {applyFilters().map((e) => {
           return (
             <>
-              <div class="bg-white w-64 shadow-2xl border rounded-xl">
+              <div class=" lg:w-64 lg:shadow-2xl border-4 lg:border bg-blue-gray-50 rounded-xl lg:mx-0 lg:my-0 my-4 mx-4 ">
                 <img
                   src={e.image}
                   alt="Productimage"
-                  class="h-72 w-64 object-cover rounded-t-xl"
+                  class="lg:h-72 lg:w-64 object-cover rounded-t-xl"
                 />
 
-                <div class="px-4 py-3 w-64">
-                  <span class="text-gray-400 mr-3 uppercase text-xs">
-                    Brand
+                <div class="px-4 py-3 lg:w-64">
+                  <span class="text-black mr-3 uppercase text-xs">
+                    {e.category}
                   </span>
                   <p class="text-lg font-bold text-black truncate block capitalize">
                     {e.name}
