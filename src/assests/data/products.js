@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1,
+    id: "1",
     name: "Dining Table and Chair Set with 4 Chairs",
     image:
       "https://imageresizer.furnituredealer.net/img/remote/images.furnituredealer.net/b/p/a1e18853-5f6b-4575-b42b-6c376b416583/assets/a1fddcf6fe004b3189763bc6228fbcf2.jpg?format=webp&quality=85&width=450&height=450&scale=both&trim.threshold=20",
@@ -8,7 +8,7 @@ export const products = [
     category: "dining-room",
   },
   {
-    id: 2,
+    id: "2",
     name: "Dining Side Chair",
     image:
       "https://imageresizer.furnituredealer.net/img/remote/images.furnituredealer.net/b/p/a1e18853-5f6b-4575-b42b-6c376b416583/assets/28cb36de0ce24b4d9750e7e3467f36f7.jpg?format=webp&quality=85&width=450&height=450&scale=both&trim.threshold=20",
@@ -32,7 +32,7 @@ export const products = [
     category: "dining-room",
   },
   {
-    id: 5,
+    id:"5",
     name: "Bar Cabinet",
     image:
       "https://imageresizer.furnituredealer.net/img/remote/images.furnituredealer.net/b/p/a1e18853-5f6b-4575-b42b-6c376b416583/assets/2febcdd3064c4903a1d808905e99c3ec.jpg?format=webp&quality=85&width=450&height=450&scale=both&trim.threshold=20",
